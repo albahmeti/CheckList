@@ -25,7 +25,7 @@ public class TodaysDate {
     }
 
     @Test
-    public void randomChecker() throws InterruptedException {
+    public void today() throws InterruptedException {
         driver.get("http://practice.cybertekschool.com/dropdown");
         Thread.sleep(2000);
 
