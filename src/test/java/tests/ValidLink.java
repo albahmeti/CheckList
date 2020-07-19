@@ -28,60 +28,27 @@ public class ValidLink {
 
 
     @Test
-    public void ValidL() throws InterruptedException, MalformedURLException {
-        driver.get("https://www.w3schools.com/");
+    public void ValidL() throws InterruptedException {
+        driver.get("https://www.selenium.dev/documentation/en/");
         Thread.sleep(2000);
 
-        String url="";
-        int response=200;
 
         List<WebElement> listL=driver.findElements(By.tagName("a"));
 
-        Iterator<WebElement> it = listL.iterator();
-        while (it.hasNext()){
-            url=it.next().getAttribute("href");
-//            System.out.println(url);
-
-            if (url.isEmpty()){
-                System.out.println("There is no link");
-                continue;
-            }
+        for (int i = 0; i < listL.size(); i++) {
+            String urL = listL.get(i).getAttribute("href");
 
             try {
-                HttpURLConnection linkV= (HttpURLConnection)(new URL(url).openConnection());
-                linkV.setRequestMethod("HEAD");
-                linkV.connect();
-
-                response=linkV.getResponseCode();
-
-                if(response>=400){
-                    System.out.println(url+" is not valid");
-                }else{
-                    System.out.println(url+" is valid");
+                if (urL.startsWith("https://") && (urL.contains(".com") || urL.contains(".dev"))) {
+                    System.out.println(urL + " is valid");
+                } else {
+                    System.out.println(urL + " is NOT valid");
                 }
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
+            } catch(NullPointerException e){
+                System.out.println("Not a link");
             }
-
         }
 
-
-//        for (WebElement element : listL) {
-//            element.getAttribute("href");
-//
-//            if(!element.getAttribute("href").isEmpty()){
-//                element.click();
-//                driver.navigate().back();
-//                System.out.println("The link is valid");
-//
-//            }else if(element.getAttribute("href").isEmpty()){
-//                System.out.println("There is no link");
-//            }
-//
-//        }
     }
 
 
